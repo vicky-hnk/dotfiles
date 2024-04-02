@@ -131,3 +131,20 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# shortcuts for todo app
+function add() {
+    ~/repos/task-bash/todo_app + "$@"
+}
+
+function mod() {
+    ~/repos/task-bash/todo_app mod "$@"
+}
+
+function del() {
+    ~/repos/task-bash/todo_app del "$@"
+}
+
