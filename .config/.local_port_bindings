@@ -1,0 +1,4 @@
+# mlflow server
+port 5000
+# postgresql
+port 5432
