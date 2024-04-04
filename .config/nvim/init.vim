@@ -16,7 +16,11 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
  Plug 'ryanoasis/vim-devicons'
  Plug 'preservim/nerdtree'
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'luochen1990/rainbow'
 call plug#end()
 
-
-
+" enablings
+inoremap <expr> <CR> pumvisible() ? coc#pum#confirm() : "\<CR>"
+let $NODE_PATH = $HOME . '/.local/node_modules'
+let g:rainbow_active = 1
