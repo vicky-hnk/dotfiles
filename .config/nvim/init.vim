@@ -16,7 +16,8 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
  Plug 'ryanoasis/vim-devicons'
  Plug 'preservim/nerdtree'
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
-
+inoremap <expr> <CR> pumvisible() ? coc#pum#confirm() : "\<CR>"
 
 
