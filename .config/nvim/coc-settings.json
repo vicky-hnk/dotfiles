@@ -1,0 +1,25 @@
+{
+ "languageserver": {
+   "eslint": {
+     "command": "eslint",
+     "args": ["--stdio"],
+     "filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+     "rootPatterns": [".eslintrc.js", "package.json"]
+   }
+ }
+}
+{
+  "python.analysis.typeCheckingMode": "strict"
+}
+{
+  "diagnostic.errorSign": "E",
+  "diagnostic.warningSign": "W",
+  "diagnostic.infoSign": "I",
+  "diagnostic.hintSign": "H"
+}
+{
+  "suggest.autoTrigger": "always",
+  "suggest.noselect": false,
+  "suggest.numberSelect": true
+}
+
