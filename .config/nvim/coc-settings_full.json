@@ -30,24 +30,6 @@
       "**/*-template.y*ml"
     ]
   },
-  "yaml.customTags": [
-    "!And scalafoundr",
-    "!If scalar",
-    "!Not",
-    "!Equals scalar",
-    "!Or scalar",
-    "!FindInMap scalar",
-    "!Base64",
-    "!Cidr",
-    "!Ref",
-    "!Sub",
-    "!GetAtt sequence",
-    "!GetAZs",
-    "!ImportValue sequence",
-    "!Select sequence",
-    "!Split sequence",
-    "!Join sequence"
-  ],
   "pyright.disableDiagnostics": false,
   "diagnostic-languageserver.filetypes": {
     "cpp": [
@@ -122,9 +104,6 @@
     "ruby": [
       "rubocop"
     ],
-    "kotlin": [
-      "ktlint"
-    ],
     "yaml": [
       "yamlfmt"
     ]
@@ -168,9 +147,6 @@
   "coc.preferences.formatOnSave": true,
   "[yaml]": {
     "coc.preferences.formatOnType": false
-  },
-  "[kotlin]": {
-    "coc.preferences.formatOnSave": false
   },
   "coc.preferences.formatOnSaveTimeout": 500,
   "coc.preferences.extensionUpdateCheck": "weekly",
