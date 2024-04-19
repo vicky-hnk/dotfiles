@@ -138,7 +138,7 @@ unset __conda_setup
 
 
 # ==============================
-# Third-party Tools Config
+# Third-party Tools
 # ==============================
 
 export NVM_DIR="$HOME/.nvm"
@@ -147,3 +147,4 @@ export NVM_DIR="$HOME/.nvm"
 # This loads nvm bash_completion
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+export PATH="~/.local/nvim-linux64/bin:$PATH"
