@@ -89,12 +89,13 @@ alias gen_ssh='bash ~/repos/utils/gen_ssh.sh'
 alias decompress='bash ~/repos/utils/decompress.sh'
 alias createrepo='bash ~/repos/utils/create_repo.sh'
 alias memory='bash ~/repos/utils/memory.sh'
+alias set_node='bash ~/repos/utils/set_nv.sh'
 
 # ==============================
 # Network
 # ==============================
-
-alias port='netstat -tulanp'
+# netstat not installed though
+# alias port='netstat -tulanp'
 
 # ==============================
 # git config for dotfiles
