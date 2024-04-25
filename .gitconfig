@@ -1,0 +1,7 @@
+[user]
+	email = v.hankemeier@uni-muenster.de
+	name = Victoria Hankemeier
+	
+[includeIf "gitdir:~/repos/man_dir/"]
+    path = ~/repos/man_dir/.gitconfig
+
