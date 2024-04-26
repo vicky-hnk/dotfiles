@@ -36,6 +36,7 @@ return {
   keys = {
     vim.keymap.set("n", "<leader>fk", ":Telescope keymaps<CR>"),
     vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>"),
+    vim.keymap.set("n", "<leader>fw", "::Telescope current_buffer_fuzzy_fin<CR>"),
     vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>"),
     vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>"),
     vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>"),
