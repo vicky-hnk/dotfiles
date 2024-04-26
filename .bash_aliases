@@ -68,6 +68,7 @@ alias mlflowstart='cd mlflow && mlflow server --backend-store-uri sqlite:///mlfl
 alias todo='python3 ~/repos/task-bash/src/gui.py'
 alias pycharm='/home/mn-man.biz/ar408/.local/pycharm-2023.3.5/bin/pycharm.sh'
 alias IJ='/home/mn-man.biz/ar408/.local/ideaC/bin/idea.sh'
+alias dbstart='cd ~/repos/phd-data && docker-compose up -d'
 
 # ==============================
 # Repository navigation

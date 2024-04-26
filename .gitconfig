@@ -5,3 +5,5 @@
 [includeIf "gitdir:~/repos/man_dir/"]
     path = ~/repos/man_dir/.gitconfig
 
+[core]
+	excludesfile = /home/mn-man.biz/ar408/.gitignore_global
