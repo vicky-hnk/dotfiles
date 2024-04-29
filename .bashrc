@@ -120,24 +120,6 @@ if ! shopt -oq posix; then
 fi
 
 # ==============================
-# Conda initialization
-# ==============================
-# !! Contents within this block are managed by 'conda init' !!
-
-__conda_setup="$('/home/mn-man.biz/ar408/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/mn-man.biz/ar408/.local/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/mn-man.biz/ar408/.local/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/mn-man.biz/ar408/.local/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-
-# ==============================
 # Third-party Tools
 # ==============================
 
@@ -148,3 +130,18 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 export PATH="~/.local/nvim-linux64/bin:$PATH"
+
+# conda initialization
+#
+__conda_setup="$('/home/vicky/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/vicky/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/vicky/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/vicky/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
