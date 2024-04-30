@@ -120,5 +120,5 @@ find_todos() {
     echo "Todos have been written to $output_file"
 }
 
-alias get-todos='get-todos'
+alias get-todos='find_todos'
 
