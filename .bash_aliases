@@ -66,8 +66,8 @@ function list() {
 
 alias mlflowstart='cd mlflow && mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlflow-artifacts --host 0.0.0.0'
 alias todo='python3 ~/repos/task-bash/src/gui.py'
-alias pycharm='/home/mn-man.biz/ar408/.local/pycharm-2023.3.5/bin/pycharm.sh'
-alias IJ='/home/mn-man.biz/ar408/.local/ideaC/bin/idea.sh'
+alias pycharm='nohup /home/mn-man.biz/ar408/.local/pycharm-2023.3.5/bin/pycharm.sh &> /dev/null &'
+alias IJ='nohup /home/mn-man.biz/ar408/.local/ideaC/bin/idea.sh &> /dev/null &'
 alias dbstart='cd ~/repos/phd-data && docker-compose up -d'
 
 # ==============================
@@ -103,4 +103,22 @@ alias set_node='bash ~/repos/utils/set_nv.sh'
 # ==============================
 
 alias config='/usr/bin/git --git-dir=/home/mn-man.biz/ar408/.cfg/ --work-tree=/home/mn-man.biz/ar408'
+
+# ==============================
+# Custom shell Functions
+# ==============================
+
+find_todos() {
+  local repo_path=${1:-$(pwd)}
+  local output_file="open-todos.md"
+  if [[ -z "$repo_path" ]]; then
+    echo "Usage: find_todos <path_to_repository> [output_file]"
+    return 1
+  fi
+
+  egrep -r "^(//|/\*|#|<!--) Todo" "$repo_path" > "$output_file"
+    echo "Todos have been written to $output_file"
+}
+
+alias get-todos='find_todos'
 
