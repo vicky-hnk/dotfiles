@@ -66,8 +66,8 @@ function list() {
 
 alias mlflowstart='cd mlflow && mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlflow-artifacts --host 0.0.0.0'
 alias todo='python3 ~/repos/task-bash/src/gui.py'
-alias pycharm='/home/mn-man.biz/ar408/.local/pycharm-2023.3.5/bin/pycharm.sh'
-alias IJ='/home/mn-man.biz/ar408/.local/ideaC/bin/idea.sh'
+alias pycharm='nohup /home/mn-man.biz/ar408/.local/pycharm-2023.3.5/bin/pycharm.sh &> /dev/null &'
+alias IJ='nohup /home/mn-man.biz/ar408/.local/ideaC/bin/idea.sh &> /dev/null &'
 alias dbstart='cd ~/repos/phd-data && docker-compose up -d'
 
 # ==============================
