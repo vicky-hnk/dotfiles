@@ -103,3 +103,21 @@ alias set_node='bash ~/repos/utils/set_nv.sh'
 
 alias config='/usr/bin/git --git-dir=/home/mn-man.biz/ar408/.cfg/ --work-tree=/home/mn-man.biz/ar408'
 
+# ==============================
+# Custom shell Functions
+# ==============================
+
+find_todos() {
+  local repo_path=${1:-$(pwd)}
+  local output_file="open-todos.md"
+  if [[ -z "$repo_path" ]]; then
+    echo "Usage: find_todos <path_to_repository> [output_file]"
+    return 1
+  fi
+
+  egrep -r "^(//|/\*|#|<!--) Todo" "$repo_path" > "$output_file"
+    echo "Todos have been written to $output_file"
+}
+
+alias get-todos='find_todos'
+
