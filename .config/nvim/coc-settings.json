@@ -1,4 +1,7 @@
 {
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
   "java.import.gradle.enabled": true,
   "java.import.maven.enabled": true,
   "java.maven.downloadSources": true,
@@ -30,24 +33,6 @@
       "**/*-template.y*ml"
     ]
   },
-  "yaml.customTags": [
-    "!And scalafoundr",
-    "!If scalar",
-    "!Not",
-    "!Equals scalar",
-    "!Or scalar",
-    "!FindInMap scalar",
-    "!Base64",
-    "!Cidr",
-    "!Ref",
-    "!Sub",
-    "!GetAtt sequence",
-    "!GetAZs",
-    "!ImportValue sequence",
-    "!Select sequence",
-    "!Split sequence",
-    "!Join sequence"
-  ],
   "pyright.disableDiagnostics": false,
   "diagnostic-languageserver.filetypes": {
     "cpp": [
@@ -90,13 +75,10 @@
     "c",
     "cpp",
     "dockerfile",
-    "go",
     "java",
     "json",
-    "kotlin",
     "lua",
     "python",
-    "ruby",
     "rust",
     "sh",
     "typescript",
@@ -118,12 +100,6 @@
     ],
     "rust": [
       "rustfmt"
-    ],
-    "ruby": [
-      "rubocop"
-    ],
-    "kotlin": [
-      "ktlint"
     ],
     "yaml": [
       "yamlfmt"
@@ -168,9 +144,6 @@
   "coc.preferences.formatOnSave": true,
   "[yaml]": {
     "coc.preferences.formatOnType": false
-  },
-  "[kotlin]": {
-    "coc.preferences.formatOnSave": false
   },
   "coc.preferences.formatOnSaveTimeout": 500,
   "coc.preferences.extensionUpdateCheck": "weekly",
