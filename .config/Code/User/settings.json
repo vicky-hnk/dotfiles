@@ -1,6 +1,4 @@
 {
     "C_Cpp.default.compilerPath": "/usr/bin/gcc",
-    "window.zoomLevel": 2,
-    "workbench.colorTheme": "Better Solarized Dark",
     "git.autofetch": true
 }
