@@ -48,7 +48,7 @@ windows:
   - pane_setup:
       layout: main-vertical
       panes:
-        - cd ~ && source ~/.bashrc
-        - cd ~/repos/forecastexperiments && source ~/.bashrc
-        - cd ~/repos/forecastexperiments && source ~/.bashrc
-        - cd ~/repos/forecastexperiments && source ~/.bashrc
+        - source ~/.bashrc && cd ~/repos/forecastexperiments 
+        - source ~/.bashrc
+        - source ~/.bashrc && cd ~/repos/forecastexperiments
+        - source ~/.bashrc
