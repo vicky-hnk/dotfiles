@@ -101,7 +101,7 @@ alias set_node='bash ~/repos/utils/set_nv.sh'
 # git config for dotfiles
 # ==============================
 
-alias config='/usr/bin/git --git-dir=/home/mn-man.biz/ar408/.cfg/ --work-tree=/home/mn-man.biz/ar408'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # ==============================
 # Custom shell Functions
@@ -121,3 +121,7 @@ find_todos() {
 
 alias get-todos='find_todos'
 
+# ==============================
+# Tmuxinator
+# ==============================
+export EDITOR=nvim
