@@ -102,7 +102,7 @@ alias set_node='bash ~/repos/utils/set_nv.sh'
 # git config for dotfiles
 # ==============================
 
-alias config='/usr/bin/git --git-dir= ~/.cfg/ --work-tree=/home/vicky'
+alias config='/usr/bin/git --git-dir= $HOME/.cfg/ --work-tree=/home/vicky'
 
 # ==============================
 # Custom shell Functions
