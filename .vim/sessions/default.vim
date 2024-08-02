@@ -13,14 +13,12 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +23 ~/.tmux/plugins/tpm/tpm
-badd +14 ~/.tmux/plugins/tmux/catppuccin.tmux
+badd +0 .bash_aliases
 argglobal
 %argdel
+$argadd .bash_aliases
+edit .bash_aliases
 argglobal
-enew
-file NvimTree_1
-balt ~/.tmux/plugins/tpm/tpm
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -28,7 +26,15 @@ setlocal fdi=#
 setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
-setlocal nofen
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 104 - ((18 * winheight(0) + 19) / 38)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 104
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
