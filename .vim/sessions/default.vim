@@ -13,14 +13,13 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +23 ~/.tmux/plugins/tpm/tpm
-badd +14 ~/.tmux/plugins/tmux/catppuccin.tmux
+badd +133 ~/.bash_aliases
 argglobal
 %argdel
 argglobal
 enew
 file NvimTree_1
-balt ~/.tmux/plugins/tpm/tpm
+balt ~/.bash_aliases
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}

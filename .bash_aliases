@@ -125,3 +125,9 @@ alias get-todos='find_todos'
 # Tmuxinator
 # ==============================
 export EDITOR=nvim
+
+# ==============================
+# Frequently used
+# ==============================
+
+alias docker_phd_up='cd repos/phd-data && docker-compose up -d'
