@@ -80,6 +80,7 @@ alias cpnotebook='cd ~/repos/cp-occupation-dataset-notebook'
 alias selenium='cd ~/repos/python-selenium-scraper'
 alias forecast='cd ~/repos/forecastexperiments'
 alias here='cd ~/repos/man_dir/here-cp'
+alias attn='cd ~/repos/transformer-attn'
 
 # ==============================
 # Execute util-scripts
