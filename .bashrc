@@ -148,3 +148,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 export PATH="~/.local/nvim-linux64/bin:$PATH"
+export LD_LIBRARY_PATH=/home/mn-man.biz/ar408/.local/miniconda3/envs/env_prediction_models/targets/x86_64-linux/lib:$LD_LIBRARY_PATH
