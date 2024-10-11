@@ -1,7 +1,10 @@
 {
-  "python.linting.pylintEnabled": false,
+  "python.linting.pylintEnabled": true,
   "python.linting.flake8Enabled": true,
   "python.linting.enabled": true,
+  "python.linting.pylintArgs": [
+    "--disable=C0114,C0115,C0116,C0330"
+  ],
   "java.import.gradle.enabled": true,
   "java.import.maven.enabled": true,
   "java.maven.downloadSources": true,
@@ -82,7 +85,7 @@
     "rust",
     "sh",
     "typescript",
-    "yaml",
+    "yaml"
   ],
   "diagnostic-languageserver.formatFiletypes": {
     "python": [
@@ -129,7 +132,7 @@
       "doesWriteToFile": true,
       "args": [
         "-F",
-        "%file",
+        "%file"
       ]
     }
   },
