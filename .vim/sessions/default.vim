@@ -15,6 +15,8 @@ else
 endif
 argglobal
 %argdel
+$argadd .bash_aliases
+edit .bash_aliases
 argglobal
 enew
 setlocal fdm=manual
