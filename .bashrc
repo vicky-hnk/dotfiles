@@ -136,6 +136,10 @@ else
 fi
 unset __conda_setup
 
+# Custom environment variables for Conda
+export PATH=$CONDA_PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+
 
 # ==============================
 # Third-party Tools
@@ -147,5 +151,8 @@ export NVM_DIR="$HOME/.nvm"
 # This loads nvm bash_completion
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+# nvim
 export PATH="~/.local/nvim-linux64/bin:$PATH"
-export LD_LIBRARY_PATH=/home/mn-man.biz/ar408/.local/miniconda3/envs/env_prediction_models/targets/x86_64-linux/lib:$LD_LIBRARY_PATH
+
+# yarn
+export PATH="$PATH:$HOME/.yarn/bin"
