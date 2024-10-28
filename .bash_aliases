@@ -8,6 +8,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
+alias getitdone='cd Documents/work'
 
 # ==============================
 # Git
