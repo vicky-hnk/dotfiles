@@ -1,10 +1,37 @@
-{
+{ // Python Linting
+  "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.enabled": true,
   "python.linting.pylintArgs": [
-    "--disable=C0114,C0115,C0116,C0330"
+    "--disable=C0114", // Missing module docstring
+    "--disable=C0115", // Missing class docstring
+    "--disable=C0116", // Missing function docstring
+    "--disable=C0330" // Bad continuation style
   ],
+  // Python Formatter
+  "python.formatting.provider": "black", // Use Black for Python formatting
+  "python.formatting.blackArgs": [
+    "--line-length",
+    "88" // Adjust line length if needed
+  ],
+  // Flake8 Configuration
+  "python.linting.flake8Args": [
+    "--max-line-length",
+    "88", // Consistent with Black formatter
+    "--ignore=E203,E266,E501,W503"
+  ],
+  // Python Analysis
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.useLibraryCodeForTypes": true,
+  // Python Autocomplete and Code Assistance
+  "python.venvPath": "~/.virtualenvs", // Set virtual environment path if using venv
+  // Diagnostics Popups
+  "diagnostic.messageTarget": "echo", // Display diagnostics in the command line, not as popups
+  // Python-specific Snippets (Optional for PyTorch)
+  "snippets.ultisnips.directories": [
+    "~/.config/nvim/UltiSnips"
+  ], // java
   "java.import.gradle.enabled": true,
   "java.import.maven.enabled": true,
   "java.maven.downloadSources": true,
@@ -31,12 +58,8 @@
       "**/kustomization.y*ml",
       "**/*.patch.y*ml"
     ],
-    "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": [
-      "**/*.template.y*ml",
-      "**/*-template.y*ml"
-    ]
   },
-  "pyright.disableDiagnostics": false,
+  "pyright.disableDiagnostics": true,
   "diagnostic-languageserver.filetypes": {
     "cpp": [
       "clangtidy",
@@ -55,10 +78,6 @@
       "flawfinder"
     ],
     "yaml": [
-      "yamllint"
-    ],
-    "cloudformation.yaml": [
-      "cloudformation",
       "yamllint"
     ],
     "vim": "vint",
@@ -96,10 +115,6 @@
     "json": [
       "fixjson",
       "jq"
-    ],
-    "go": [
-      "goimports",
-      "gofmt"
     ],
     "rust": [
       "rustfmt"
@@ -180,6 +195,35 @@
             "stan": {
               "globalOn": true
             }
+          }
+        }
+      }
+    },
+    "texlab": {
+      "command": "texlab",
+      "filetypes": [
+        "tex",
+        "bib"
+      ],
+      "rootPatterns": [
+        ".git/"
+      ],
+      "trace.server": "verbose",
+      "settings": {
+        "latex": {
+          "build": {
+            "onSave": true
+          },
+          "forwardSearch": {
+            "executable": "zathura",
+            "args": [
+              "--synctex-forward",
+              "%l:1:%f",
+              "%p"
+            ]
+          },
+          "lint": {
+            "onChange": true
           }
         }
       }
