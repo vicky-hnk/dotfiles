@@ -24,3 +24,35 @@ vim.keymap.set("n", "<C-up>", ":resize +2", opts)
 vim.keymap.set("n", "<C-down>", ":resize -2", opts)
 vim.keymap.set("n", "<C-left>", ":vertical resize +2", opts)
 vim.keymap.set("n", "<C-right>", ":vertical resize -2", opts)
+
+-- VimTeX key mappings
+
+-- Compilation mappings
+vim.keymap.set("n", "<leader>tl", ":VimtexCompile<CR>", opts)   -- Start/continue LaTeX compilation
+vim.keymap.set("n", "<leader>tc", ":VimtexCompileSS<CR>", opts) -- Compile the document silently once
+vim.keymap.set("n", "<leader>tk", ":VimtexStop<CR>", opts)      -- Stop LaTeX compilation
+vim.keymap.set("n", "<leader>te", ":VimtexErrors<CR>", opts)    -- Show LaTeX errors
+
+-- PDF viewing
+vim.keymap.set("n", "<leader>tv", ":VimtexView<CR>", opts) -- Open the compiled PDF with forward search
+
+-- Table of contents mappings
+vim.keymap.set("n", "<leader>tt", ":VimtexTocToggle<CR>", opts) -- Toggle table of contents
+vim.keymap.set("n", "<leader>to", ":VimtexTocOpen<CR>", opts)   -- Open TOC window
+vim.keymap.set("n", "<leader>tq", ":VimtexTocClose<CR>", opts)  -- Close TOC window
+
+-- Toggle automatic compilation
+vim.keymap.set("n", "<leader>ta", ":VimtexCompileToggle<CR>", opts) -- Toggle automatic compilation on save
+
+-- Cleaning files
+vim.keymap.set("n", "<leader>tC", ":VimtexClean!<CR>", opts) -- Clean auxiliary and output files (PDF)
+vim.keymap.set("n", "<leader>tx", ":VimtexClean<CR>", opts)  -- Clean auxiliary LaTeX files (changed from <leader>tc to avoid conflict)
+
+-- Navigation through LaTeX errors in quickfix list
+vim.keymap.set("n", "<leader>tn", ":cnext<CR>", opts)     -- Next LaTeX error
+vim.keymap.set("n", "<leader>tp", ":cprevious<CR>", opts) -- Previous LaTeX error
+vim.keymap.set("n", "<leader>tL", ":lopen<CR>", opts)     -- Open quickfix list
+vim.keymap.set("n", "<leader>tq", ":cclose<CR>", opts)    -- Close quickfix list
+
+-- PDF preview in a terminal split
+vim.api.nvim_set_keymap("n", "<leader>tp", ":vsplit | terminal mupdf %:r.pdf<CR>", opts)
