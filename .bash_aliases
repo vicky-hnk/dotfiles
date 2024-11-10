@@ -39,6 +39,8 @@ function gp() {
 function gcb() {
         git checkout "$1"
 }
+# delete pycache
+alias delpy='find . -type d -name "__pycache__" -exec rm -r {} +'
 
 # ==============================
 # Custom Functions
