@@ -65,3 +65,9 @@ vim.api.nvim_set_keymap('n', '<F12>', '<Cmd>lua require("dap").step_out()<CR>', 
 vim.api.nvim_set_keymap('n', '<Leader>b', '<Cmd>lua require("dap").toggle_breakpoint()<CR>', opts)
 vim.api.nvim_set_keymap('n', '<Leader>B',
   '<Cmd>lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opts)
+-- Toggle the DAP UI
+vim.api.nvim_set_keymap("n", "<Leader>du", "<Cmd>lua require('dapui').toggle()<CR>", opts)
+-- Open the DAP REPL (Read-Eval-Print Loop)
+vim.api.nvim_set_keymap("n", "<Leader>dr", "<Cmd>lua require('dap').repl.open()<CR>", opts)
+-- Toggle the DAP console
+vim.api.nvim_set_keymap("n", "<Leader>dc", "<Cmd>lua require('dapui').eval()<CR>", opts)
