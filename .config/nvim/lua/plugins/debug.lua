@@ -1,6 +1,9 @@
 -- Set up DAP
 
 return {
+  --nvim-nio dependency
+  { "nvim-neotest/nvim-nio" },
+
   -- Main nvim-dap plugin
   {
     "mfussenegger/nvim-dap",
@@ -47,6 +50,7 @@ return {
           program = function()
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
+
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
           args = {},
@@ -73,18 +77,22 @@ return {
   -- nvim-dap-ui for a visual debugging interface
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
-      require("dapui").setup()
-      local dap, dapui = require("dap"), require("dapui")
-
-      -- Open and close UI automatically with debugging sessions
-      dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+      -- Use pcall to ensure the module loads without errors
+      local ok, dapui = pcall(require, "dapui")
+      if ok then
+        dapui.setup()
+        local dap = require("dap")
+        -- Automatically open and close the dap-ui interface on session events
+        dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+        dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+        dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+      else
+        print("Failed to load dapui")
+      end
     end,
   },
-
   -- nvim-dap-virtual-text for inline debugging information
   {
     "theHamsta/nvim-dap-virtual-text",
