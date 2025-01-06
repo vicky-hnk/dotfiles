@@ -131,7 +131,14 @@ alias get-todos='find_todos'
 export EDITOR=nvim
 
 # ==============================
-# Frequently used
+# Docker
 # ==============================
 
 alias docker_phd_up='cd repos/phd-data && docker-compose up -d'
+
+# ==============================
+# AWS Configuration
+# ==============================
+
+alias awslogin='aws sso --profile srp-dev'
+alias awsconfig='cat ~/.aws/config'
