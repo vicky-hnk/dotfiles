@@ -1,4 +1,25 @@
 {
+    "editor.tabSize": 2,
+    "files.autoSave": "onFocusChange",
+    "yaml.schemas": {
+      "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": "*.template.yml"
+    },
     "C_Cpp.default.compilerPath": "/usr/bin/gcc",
-    "git.autofetch": true
-}
+    "git.autofetch": true,
+    "yaml.customTags": [
+      "!Ref",
+      "!Sub",
+      "!Join",
+      "!GetAtt",
+      "!Base64",
+      "!FindInMap",
+      "!Select",
+      "!Split",
+      "!If",
+      "!Equals",
+      "!Not",
+      "!And",
+      "!Or",
+      "!Condition"
+    ]
+  }
