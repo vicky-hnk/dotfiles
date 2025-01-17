@@ -156,3 +156,4 @@ export PATH="~/.local/nvim-linux64/bin:$PATH"
 
 # yarn
 export PATH="$PATH:$HOME/.yarn/bin"
+export PATH=$HOME/.local/bin:$PATH
