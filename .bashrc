@@ -10,18 +10,19 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+
+# HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
-shopt -s histappend
+# shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# HISTSIZE=1000
+# HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+# shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
@@ -102,21 +103,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias sourcebash='source ~/.bashrc'
 
-# Additional ones are in ~/.bash_aliases
+# ==============================
+# Zsh-Specific Aliases (for Zsh)
+# ==============================
+
+# If there are any Zsh aliases in ~/.bash_aliases, source them
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
-fi
-
-# ==============================
-# Completion
-# ==============================
-
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
 fi
 
 # ==============================
@@ -124,14 +117,14 @@ fi
 # ==============================
 # !! Contents within this block are managed by 'conda init' !!
 
-__conda_setup="$('/home/mn-man.biz/ar408/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('~/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/mn-man.biz/ar408/.local/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/mn-man.biz/ar408/.local/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "~/.local/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "~/.local/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/mn-man.biz/ar408/.local/miniconda3/bin:$PATH"
+        export PATH="~/.local/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
