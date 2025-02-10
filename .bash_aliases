@@ -129,6 +129,7 @@ alias get-todos='find_todos'
 # Tmuxinator
 # ==============================
 export EDITOR=nvim
+alias dualzsh='tmuxinator start dualzsh'
 
 # ==============================
 # Docker
