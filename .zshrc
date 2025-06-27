@@ -94,3 +94,5 @@ alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 
 # Reload shell config without restarting terminal
 alias reload="source ~/.zshrc"
+
+[ -f "/home/vicky/.ghcup/env" ] && . "/home/vicky/.ghcup/env" # ghcup-env
