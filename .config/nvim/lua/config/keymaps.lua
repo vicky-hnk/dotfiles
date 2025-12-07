@@ -17,7 +17,7 @@ vim.keymap.set("n", "<C-k>", ":TmuxNavigateup", opts)    -- up
 vim.keymap.set("n", "<C-l>", ":TmuxNavigateright", opts) -- right
 -- nvim tree
 vim.keymap.set("n", "<leader>t", ":NvimTreeFocus<CR>", opts)
-vim.keymap.set("n", "<leader>f", ":NvimTreeToggle<CR>", opts)
+vim.keymap.set("n", "<leader>ff", ":NvimTreeToggle<CR>", opts)
 -- windows
 vim.keymap.set("n", "<leader>sv", ":vsplit", opts) -- split vertically
 vim.keymap.set("n", "<C-up>", ":resize +2", opts)
