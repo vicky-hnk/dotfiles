@@ -117,21 +117,21 @@ fi
 # ==============================
 # !! Contents within this block are managed by 'conda init' !!
 
-__conda_setup="$('~/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "~/.local/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "~/.local/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/.local/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/.local/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="~/.local/miniconda3/bin:$PATH"
+        export PATH="$HOME/.local/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
 # Custom environment variables for Conda
-export PATH=$CONDA_PREFIX/bin:$PATH
-export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+export PATH="$CONDA_PREFIX/bin:$PATH"
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 
 
 # ==============================
@@ -150,3 +150,19 @@ export PATH="~/.local/nvim-linux64/bin:$PATH"
 # yarn
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH=$HOME/.local/bin:$PATH
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/mn-man.biz/ar408/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/mn-man.biz/ar408/.local/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/mn-man.biz/ar408/.local/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/mn-man.biz/ar408/.local/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

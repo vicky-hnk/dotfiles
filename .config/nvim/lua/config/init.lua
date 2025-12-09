@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 -- Lazy Plug-In manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -11,10 +13,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
-require("config.globals")
-require("config.options")
-require("config.keymaps")
 
 local plugins = "plugins"
 local opts = {
@@ -40,3 +38,7 @@ local opts = {
 }
 
 require("lazy").setup(plugins, opts)
+
+require("config.globals")
+require("config.options")
+require("config.keymaps")

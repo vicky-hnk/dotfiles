@@ -29,7 +29,7 @@ vim.keymap.set("n", "<C-right>", ":vertical resize -2", opts)
 
 -- Compilation mappings
 vim.keymap.set("n", "<leader>tl", ":VimtexCompile<CR>", opts)   -- Start/continue LaTeX compilation
-vim.keymap.set("n", "<leader>tc", ":VimtexCompileSS<CR>", opts) -- Compile the document silently once
+-- vim.keymap.set("n", "<leader>tc", ":VimtexCompileSS<CR>", opts) -- Compile the document silently once
 vim.keymap.set("n", "<leader>tk", ":VimtexStop<CR>", opts)      -- Stop LaTeX compilation
 vim.keymap.set("n", "<leader>te", ":VimtexErrors<CR>", opts)    -- Show LaTeX errors
 
