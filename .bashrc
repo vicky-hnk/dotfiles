@@ -109,8 +109,8 @@ alias sourcebash='source ~/.bashrc'
 # ==============================
 
 # If there are any Zsh aliases in ~/.bash_aliases, source them
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f $HOME/.bash_aliases ]; then
+    . $HOME/.bash_aliases
 fi
 
 # ==============================
@@ -118,14 +118,14 @@ fi
 # ==============================
 # !! Contents within this block are managed by 'conda init' !!
 
-__conda_setup="$('~/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "~/.local/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "~/.local/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/.local/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/.local/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="~/.local/miniconda3/bin:$PATH"
+        export PATH="$HOME/.local/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -146,7 +146,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # nvim
-export PATH="~/.local/nvim-linux64/bin:$PATH"
+export PATH="$HOME/.local/nvim-linux64/bin:$PATH"
 
 # yarn
 export PATH="$PATH:$HOME/.yarn/bin"
