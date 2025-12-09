@@ -89,24 +89,25 @@ export EDITOR='nvim'
 # export ARCHFLAGS="-arch $(uname -m)"
 
 # 🔹 Better alias definitions
+
 alias zshconfig="$EDITOR ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 
 # Reload shell config without restarting terminal
 alias reload="source ~/.zshrc"
 
-[ -f "/home/vicky/.ghcup/env" ] && . "/home/vicky/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/vicky/.local/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/.local/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/vicky/.local/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/vicky/.local/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/.local/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/.local/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/vicky/.local/miniconda3/bin:$PATH"
+        export PATH="$HOME/.local/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
