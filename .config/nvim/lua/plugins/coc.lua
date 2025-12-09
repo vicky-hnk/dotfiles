@@ -3,7 +3,7 @@ return {
     'neoclide/coc.nvim',
     event = "VeryLazy",
     branch = 'master',
-    build = 'yarn install --frozen-lockfile',
+    build = 'npm install',
     init = function()
       -- Use <C-j> to jump to forward placeholder, which is default
       vim.g.coc_snippet_next = '<c-j>'
@@ -29,7 +29,6 @@ return {
         'coc-pyright',
         'coc-sh',
         'coc-snippets',
-        'coc-sumneko-lua',
         'coc-tsserver',
         'coc-texlab',
         'coc-xml',
