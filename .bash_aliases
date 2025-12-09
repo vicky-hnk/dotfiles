@@ -67,7 +67,7 @@ function list() {
 # Application start ups
 # ==============================
 
-alias mlflowstart='cd mlflow && mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlflow-artifacts --host 0.0.0.0'
+alias mlflowstart="cd mlflow && mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlflow-artifacts --host 0.0.0.0"
 alias todo='python3 ~/repos/task-bash/src/gui.py'
 alias pycharm='nohup ~/.local/pycharm-2023.3.5/bin/pycharm.sh &> /dev/null &'
 alias IJ='nohup ~/.local/ideaC/bin/idea.sh &> /dev/null &'
@@ -128,6 +128,7 @@ alias get-todos='find_todos'
 # ==============================
 # Tmuxinator
 # ==============================
+
 export EDITOR=nvim
 alias dualzsh='tmuxinator start dualzsh'
 
