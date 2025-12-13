@@ -40,3 +40,4 @@ local opts = {
 }
 
 require("lazy").setup(plugins, opts)
+require("lsp").setup()
