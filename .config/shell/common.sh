@@ -1,5 +1,5 @@
 export EDITOR="nvim"
-
+export VISUAL="nvim"
 
 # Local bins
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
@@ -15,8 +15,12 @@ alias getitdone='cd "$HOME/Documents/work"'
 alias coding-lab='cd ~/.repos/research'
 
 #Git helpers
+unalias gp 2>/dev/null || true
+unalias gcb 2>/dev/null || true
+unalias gs 2>/dev/null || true
+unalias gac 2>/dev/null || true
+
 alias gs='git status'
-ga()  { git add "$@"; }
 gac() { git add "$1" && git commit -m "$2"; }
 gp()  { git push "$@"; }
 gcb() { git checkout "$1"; }
