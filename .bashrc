@@ -9,26 +9,6 @@ case $- in
 esac
 
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-
-# HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-# shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-# HISTSIZE=1000
-# HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-# shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -104,52 +84,41 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias sourcebash='source ~/.bashrc'
 
+
 # ==============================
-# Zsh-Specific Aliases (for Zsh)
+# PATH / Tools
 # ==============================
 
-# If there are any Zsh aliases in ~/.bash_aliases, source them
-if [ -f $HOME/.bash_aliases ]; then
-    . $HOME/.bash_aliases
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# ==============================
-# Conda initialization
-# ==============================
-# !! Contents within this block are managed by 'conda init' !!
-
-__conda_setup="$('$HOME/.local/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.local/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.local/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/.local/miniconda3/bin:$PATH"
-    fi
+if [ -d "$HOME/.yarn/bin" ]; then
+  export PATH="$PATH:$HOME/.yarn/bin"
 fi
-unset __conda_setup
 
-# Custom environment variables for Conda
-export PATH=$CONDA_PREFIX/bin:$PATH
-export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+[ -r "$HOME/.cargo/env" ] && . "$HOME/.cargo/envi"
 
 
 # ==============================
-# Third-party Tools
+# Shared shell config (Bash + Zsh)
+# ==============================
+
+[ -r "$HOME/.config/shell/common.sh" ] && . "$HOME/.config/shell/common.sh"
+
+# ==============================
+# Node / NVM
 # ==============================
 
 export NVM_DIR="$HOME/.nvm"
-# This loads nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# This loads nvm bash_completion
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# nvim
-export PATH="$HOME/.local/nvim-linux64/bin:$PATH"
-
-# yarn
-export PATH="$PATH:$HOME/.yarn/bin"
-export PATH=$HOME/.local/bin:$PATH
-
+# --- Lazy-load NVM (fast startup) ---
+nvm() {
+  unset -f nvm node npm npx 2>/dev/null || true
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  nvm "$@"
+}
+node() { nvm use --silent >/dev/null 2>&1 || true; command node "$@"; }
+npm()  { nvm use --silent >/dev/null 2>&1 || true; command npm "$@"; }
+npx()  { nvm use --silent >/dev/null 2>&1 || true; command npx "$@"; }
 

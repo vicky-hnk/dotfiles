@@ -26,7 +26,7 @@ return {
       --- JS/ TS
       "ts_ls",
       },
-      automatic_enable = true,
+      automatic_enable = false,
     },
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
