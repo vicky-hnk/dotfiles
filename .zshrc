@@ -1,16 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Source .bashrc if it exists
-if [ -f ~/.bashrc ]; then
-  source ~/.bashrc
-fi
-
-# Source .bash_aliases if it exists
-if [ -f ~/.bash_aliases ]; then
-  source ~/.bash_aliases
-fi
-
 # Path to your Oh My Zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -23,7 +10,7 @@ else
 fi
 
 # Set theme
-ZSH_THEME="robbyrussell"
+ZSH_THEME="Starship"
 
 # Enable useful plugins
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
@@ -113,3 +100,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# UV
+eval "$(uv generate-shell-completion zsh)"
