@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # ==============================
 # Environment
 # ==============================
@@ -93,6 +86,15 @@ bindkey -r "^[j"  # Unbind Alt+j
 bindkey -r "^[k"  # Unbind Alt+k
 bindkey -r "^[l"  # Unbind Alt+l
 
+[[ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[[ -r /usr/share/doc/fzf/examples/completion.zsh ]] && source /usr/share/doc/fzf/examples/completion.zsh
+
+# fzf custom keybindings
+bindkey '^H' fzf-history-widget
+bindkey '^F' fzf-file-widget
+bindkey '^G' fzf-cd-widget
+
+
 # ==============================
 # Other Stuff
 # ==============================
@@ -136,3 +138,10 @@ eval "$(uv generate-shell-completion zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Git + fzf helpers
+[[ -r "$HOME/.config/shell/git-fzf.zsh" ]] && source "$HOME/.config/shell/git-fzf.zsh"
