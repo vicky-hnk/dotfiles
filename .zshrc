@@ -1,104 +1,138 @@
-# Path to your Oh My Zsh installation
-export ZSH="$HOME/.oh-my-zsh"
-
-# Optimize Zsh completion initialization
-autoload -Uz compinit
-if [[ -n "$ZDOTDIR" ]]; then
-  compinit -d "$ZDOTDIR/.zcompdump"
-else
-  compinit -d "$HOME/.zcompdump"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# ==============================
+# Environment
+# ==============================
+
+# Preferred editor setup
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+if [[ -d "$HOME/.local/bin" ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
+[[ -r "$HOME/.config/shell/common.sh" ]] && source "$HOME/.config/shell/common.sh"
+
+# Prevent Oh My Zsh from asking about insecure completion dirs
+export ZSH_DISABLE_COMPFIX=true
+
+# ==============================
+# OMZ
+# ==============================
+
+# Path to Oh My Zsh installation
+export ZSH="$HOME/.oh-my-zsh"
+
 # Set theme
-ZSH_THEME="Starship"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Enable useful plugins
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
 
-# Enable directory auto-completion for `cd`
-zstyle ':completion:*' menu select
-
 # Load Oh My Zsh **before custom bindings**
 source $ZSH/oh-my-zsh.sh
-
-# 🔹 Unbind keybindings for hjkl navigation
-bindkey -r "^[h"  # Unbind Alt+h
-bindkey -r "^[j"  # Unbind Alt+j
-bindkey -r "^[k"  # Unbind Alt+k
-bindkey -r "^[l"  # Unbind Alt+l
-bindkey -r "^H"   # Unbind Ctrl+H (backward-delete-char)
-bindkey -r "^[H"  # Unbind Alt+H (run-help)
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment to make `_` and `-` interchangeable in completions.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment to disable Oh My Zsh auto-update.
-# zstyle ':omz:update' mode disabled
-
-# Uncomment to change the auto-update frequency (default: 13 days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment if pasting URLs breaks behavior.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment to disable colors in `ls`
-# DISABLE_LS_COLORS="true"
-
-# Uncomment to disable setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment to show dots when waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment to disable slow repository status checks.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment to change command history timestamp format.
-# HIST_STAMPS="yyyy-mm-dd"
-
-# Custom User Configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# Set language environment (if needed)
-# export LANG=en_US.UTF-8
-
-# Preferred editor setup
-export EDITOR='nvim'
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# 🔹 Better alias definitions
 
 alias zshconfig="$EDITOR ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 
+zstyle ':completion:*' menu select
+
+# ==============================
+# Completion & History
+# ==============================
+
+# completion interface settings
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' group-name ''
+
+# flags
+setopt AUTO_LIST
+setopt AUTO_MENU
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+
+# History
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE="$HOME/.zsh_history"
+
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+setopt EXTENDED_HISTORY
+
+# ==============================
+# Search
+# ==============================
+
+
+
+# ==============================
+# Keybindings
+# ==============================
+
+# Unbind keybindings for hjkl navigation
+bindkey -r "^[h"  # Unbind Alt+h
+bindkey -r "^[j"  # Unbind Alt+j
+bindkey -r "^[k"  # Unbind Alt+k
+bindkey -r "^[l"  # Unbind Alt+l
+
+# ==============================
+# Other Stuff
+# ==============================
+
 # Reload shell config without restarting terminal
 alias reload="source ~/.zshrc"
 
+# GHC
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/.local/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.local/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.local/miniconda3/etc/profile.d/conda.sh"
+# Conda
+
+if [[ -d "$HOME/.local/miniconda3" ]]; then
+  export CONDA_HOME="$HOME/.local/miniconda3"
+  export PATH="$CONDA_HOME/bin:$PATH"
+
+  conda() {
+    unfunction conda 2>/dev/null || true
+
+    # Prefer conda.sh if present (faster + standard)
+    if [[ -r "$CONDA_HOME/etc/profile.d/conda.sh" ]]; then
+      source "$CONDA_HOME/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/.local/miniconda3/bin:$PATH"
+      # Fallback to hook (works even if conda.sh isn't available)
+      local __conda_setup
+      __conda_setup="$("$CONDA_HOME/bin/conda" "shell.zsh" "hook" 2>/dev/null)" || true
+      [[ -n "$__conda_setup" ]] && eval "$__conda_setup"
+      unset __conda_setup
     fi
+
+    conda "$@"
+  }
+
+  # (de-) activate without typing conda
+  activate()   { conda activate "$@"; }
+  deactivate() { conda deactivate "$@"; }
 fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 # UV
 eval "$(uv generate-shell-completion zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
