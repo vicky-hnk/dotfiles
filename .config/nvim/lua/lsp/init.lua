@@ -1,11 +1,12 @@
+-- lua/lsp/init.lua (Neovim 0.11+)
 local module = {}
 
---- Python LSP toggle
+-- Toggle Python type servers here (Ruff is always enabled below)
 local python_lsps = {
-pyright = true,
-basedpyright = false,
-ty = false,
-pyrefly = false,
+  pyright = true,
+  basedpyright = false,
+  ty = false,
+  pyrefly = false,
 }
 
 local function get_capabilities()
@@ -19,36 +20,72 @@ local function get_capabilities()
   return capabilities
 end
 
-local function setup_keymaps()
+-- Run Ruff formatter for the current buffer (non-blocking)
+local function ruff_format_buf(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  local file = vim.api.nvim_buf_get_name(bufnr)
+  if file == "" then return end
+
+  -- Prefer local venv / project toolchain if you use one; fallback to PATH
+  if vim.fn.executable("ruff") ~= 1 then
+    vim.notify("ruff not found in PATH", vim.log.levels.WARN)
+    return
+  end
+
+  vim.system({ "ruff", "format", file }, { text = true }, function(res)
+    if res.code ~= 0 then
+      local msg = (res.stderr and res.stderr ~= "") and res.stderr or "ruff format failed"
+      vim.schedule(function()
+        vim.notify(msg, vim.log.levels.ERROR)
+      end)
+      return
+    end
+
+    -- Reload file if it changed on disk
+    vim.schedule(function()
+      -- Preserve cursor/view as best as possible
+      local view = vim.fn.winsaveview()
+      vim.cmd("checktime") -- detect file changes
+      vim.cmd("edit!")     -- reload
+      vim.fn.winrestview(view)
+    end)
+  end)
+end
+
+local function setup_lsp_attach()
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local bufnr = args.buf
+      local client_id = args.data and args.data.client_id
+      if not client_id then return end
+      local client = vim.lsp.get_client_by_id(client_id)
+      if not client then return end
+
       local map = function(mode, lhs, rhs)
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
       end
 
+      -- Core LSP keymaps
       map("n", "gd", vim.lsp.buf.definition)
       map("n", "gr", vim.lsp.buf.references)
       map("n", "K", vim.lsp.buf.hover)
       map("n", "<leader>rn", vim.lsp.buf.rename)
       map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
-      map("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end)
-    end,
-  })
-end
 
-local function prefer_ruff_formatting_for_python()
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if not client then return end
+      -- Formatting strategy:
+      -- - Python: always use `ruff format` (deterministic; avoids LSP formatter conflicts)
+      -- - Other filetypes: use LSP formatting (async)
+      map("n", "<leader>f", function()
+        if vim.bo[bufnr].filetype == "python" then
+          ruff_format_buf(bufnr)
+        else
+          vim.lsp.buf.format({ async = true })
+        end
+      end)
 
-      -- Only apply this policy for Python buffers
-      local ft = vim.bo[args.buf].filetype
-      if ft ~= "python" then return end
-
-      -- Disable formatting from *non-ruff* Python servers to avoid conflicts
-      if client.name ~= "ruff" then
+      -- Python policy: keep Ruff + type server(s), but avoid formatting conflicts.
+      -- Disable LSP formatting for ALL Python clients (we format via Ruff CLI).
+      if vim.bo[bufnr].filetype == "python" then
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
       end
@@ -60,9 +97,8 @@ local function configure_servers(capabilities)
   -- Default for all servers
   vim.lsp.config("*", { capabilities = capabilities })
 
-  -- Ruff (lint + code actions; formatting depends on Ruff config)
+  -- Ruff: diagnostics + code actions (formatting via CLI in this setup)
   vim.lsp.config("ruff", {
-    capabilities = capabilities,
     init_options = {
       settings = {
         configurationPreference = "filesystemFirst",
@@ -70,20 +106,23 @@ local function configure_servers(capabilities)
     },
   })
 
-  -- Python type-checkers / language servers (configure all; enable via table)
+  -- Pyright: types/intel. Reduce overlap with Ruff if desired.
   vim.lsp.config("pyright", {
-    capabilities = capabilities,
     settings = {
       python = {
         analysis = {
           typeCheckingMode = "basic",
+          -- Optional: let Ruff handle these to reduce noise
+          diagnosticSeverityOverrides = {
+            reportUnusedImport = "none",
+            reportUnusedVariable = "none",
+          },
         },
       },
     },
   })
 
   vim.lsp.config("basedpyright", {
-    capabilities = capabilities,
     settings = {
       basedpyright = {
         disableOrganizeImports = true,
@@ -96,7 +135,6 @@ local function configure_servers(capabilities)
   })
 
   vim.lsp.config("ty", {
-    capabilities = capabilities,
     settings = {
       ty = {
         diagnosticMode = "workspace",
@@ -109,7 +147,6 @@ local function configure_servers(capabilities)
   })
 
   vim.lsp.config("pyrefly", {
-    capabilities = capabilities,
     settings = {
       python = {
         pyrefly = {
@@ -130,7 +167,6 @@ local function configure_servers(capabilities)
 
   -- TypeScript / JavaScript
   vim.lsp.config("ts_ls", {
-    capabilities = capabilities,
     settings = {
       typescript = {
         inlayHints = {
@@ -153,7 +189,6 @@ local function configure_servers(capabilities)
 
   -- JSON schemas via schemastore.nvim
   vim.lsp.config("jsonls", {
-    capabilities = capabilities,
     settings = {
       json = {
         schemas = require("schemastore").json.schemas({ validate = { enable = true } }),
@@ -164,10 +199,9 @@ local function configure_servers(capabilities)
 
   -- YAML + CloudFormation
   vim.lsp.config("yamlls", {
-    capabilities = capabilities,
     settings = {
       yaml = {
-        schemaStore = { enable = false, url = "" }, -- use schemastore.nvim instead
+        schemaStore = { enable = false, url = "" },
         schemas = require("schemastore").yaml.schemas({
           validate = { enable = true },
           extra = {
@@ -203,22 +237,22 @@ local function configure_servers(capabilities)
 end
 
 local function enable_servers()
-  -- Always enable ruff
+  -- Always enable Ruff for Python
   vim.lsp.enable("ruff", true)
 
-  -- Enable exactly the python servers wanted
+  -- Enable exactly the python servers you want (types/intel)
   for name, enabled in pairs(python_lsps) do
     vim.lsp.enable(name, enabled)
   end
 
+  -- Others
   vim.lsp.enable("yamlls", true)
   vim.lsp.enable("jsonls", true)
   vim.lsp.enable("ts_ls", true)
 end
 
 function module.setup()
-  setup_keymaps()
-  prefer_ruff_formatting_for_python()
+  setup_lsp_attach()
 
   local capabilities = get_capabilities()
   configure_servers(capabilities)
