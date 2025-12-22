@@ -70,11 +70,6 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
 
-# ==============================
-# Search
-# ==============================
-
-
 
 # ==============================
 # Keybindings
@@ -134,6 +129,7 @@ if [[ -d "$HOME/.local/miniconda3" ]]; then
 fi
 
 # UV
+eval "$(direnv hook zsh)"
 eval "$(uv generate-shell-completion zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
