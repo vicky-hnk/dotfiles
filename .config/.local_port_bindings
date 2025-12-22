@@ -1,6 +1,0 @@
-# mlflow server
-port 5000
-# postgresql
-port 5432
-# pgAdmin-with postgresql
-port 5050
