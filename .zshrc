@@ -30,7 +30,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Enable useful plugins
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
+plugins=(git zsh-autosuggestions zsh-completions)
 
 # Load Oh My Zsh **before custom bindings**
 source $ZSH/oh-my-zsh.sh
@@ -81,13 +81,23 @@ bindkey -r "^[j"  # Unbind Alt+j
 bindkey -r "^[k"  # Unbind Alt+k
 bindkey -r "^[l"  # Unbind Alt+l
 
-[[ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[[ -r /usr/share/doc/fzf/examples/completion.zsh ]] && source /usr/share/doc/fzf/examples/completion.zsh
+# ==============================
+# Fuzzyfind
+# ==============================
 
-# fzf custom keybindings
-bindkey '^H' fzf-history-widget
-bindkey '^F' fzf-file-widget
-bindkey '^G' fzf-cd-widget
+if command -v fzf >/dev/null 2>&1; then
+  # Correct locations (works on most distros + macOS)
+  source /usr/share/fzf/key-bindings.zsh 2>/dev/null \
+    || source ~/.fzf/shell/key-bindings.zsh 2>/dev/null
+
+  source /usr/share/fzf/completion.zsh 2>/dev/null \
+    || source ~/.fzf/shell/completion.zsh 2>/dev/null
+
+  # Bind keys only if widgets exist
+  zle -l fzf-history-widget >/dev/null 2>&1 && bindkey '^H' fzf-history-widget
+  zle -l fzf-file-widget    >/dev/null 2>&1 && bindkey '^F' fzf-file-widget
+  zle -l fzf-cd-widget      >/dev/null 2>&1 && bindkey '^G' fzf-cd-widget
+fi
 
 
 # ==============================
@@ -140,7 +150,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Zoxide
-eval "$(zoxide init zsh)"
+command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+
 
 # Git + fzf helpers
 [[ -r "$HOME/.config/shell/git-fzf.zsh" ]] && source "$HOME/.config/shell/git-fzf.zsh"
+
+# ==============================
+# Syntax highlighting
+# ==============================
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null \
+  || source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
