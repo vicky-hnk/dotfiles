@@ -85,20 +85,36 @@ bindkey -r "^[l"  # Unbind Alt+l
 # Fuzzyfind
 # ==============================
 
-if command -v fzf >/dev/null 2>&1; then
-  # Correct locations (works on most distros + macOS)
-  source /usr/share/fzf/key-bindings.zsh 2>/dev/null \
-    || source ~/.fzf/shell/key-bindings.zsh 2>/dev/null
 
-  source /usr/share/fzf/completion.zsh 2>/dev/null \
-    || source ~/.fzf/shell/completion.zsh 2>/dev/null
+if (( $+commands[fzf] )); then
+  # Source key-bindings and completion from common locations
+  for f in \
+    /usr/share/doc/fzf/examples/key-bindings.zsh \
+    /usr/share/fzf/key-bindings.zsh \
+    ~/.fzf/shell/key-bindings.zsh
+  do
+    [[ -r "$f" ]] && source "$f" && break
+  done
 
-  # Bind keys only if widgets exist
-  zle -l fzf-history-widget >/dev/null 2>&1 && bindkey '^H' fzf-history-widget
-  zle -l fzf-file-widget    >/dev/null 2>&1 && bindkey '^F' fzf-file-widget
-  zle -l fzf-cd-widget      >/dev/null 2>&1 && bindkey '^G' fzf-cd-widget
+  for f in \
+    /usr/share/doc/fzf/examples/completion.zsh \
+    /usr/share/fzf/completion.zsh \
+    ~/.fzf/shell/completion.zsh
+  do
+    [[ -r "$f" ]] && source "$f" && break
+  done
+
+  # Bind keys only if widgets exist (correct check)
+  if zle -l | command grep -qxF fzf-history-widget; then
+    bindkey '^H' fzf-history-widget   # standard, conflict-free
+  fi
+  if zle -l | command grep -qxF fzf-file-widget; then
+    bindkey '^F' fzf-file-widget      # standard, conflict-free
+  fi
+  if zle -l | command grep -qxF fzf-cd-widget; then
+    bindkey 'G' fzf-cd-widget       # Alt-C
+  fi
 fi
-
 
 # ==============================
 # Other Stuff
