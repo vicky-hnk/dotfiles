@@ -106,13 +106,13 @@ if (( $+commands[fzf] )); then
 
   # Bind keys only if widgets exist (correct check)
   if zle -l | command grep -qxF fzf-history-widget; then
-    bindkey '^H' fzf-history-widget   # standard, conflict-free
+    bindkey '^H' fzf-history-widget
   fi
   if zle -l | command grep -qxF fzf-file-widget; then
-    bindkey '^F' fzf-file-widget      # standard, conflict-free
+    bindkey '^F' fzf-file-widget
   fi
   if zle -l | command grep -qxF fzf-cd-widget; then
-    bindkey 'G' fzf-cd-widget       # Alt-C
+    bindkey '^G' fzf-cd-widget
   fi
 fi
 
