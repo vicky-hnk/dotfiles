@@ -3,9 +3,9 @@ local module = {}
 
 -- Toggle Python type servers here (Ruff is always enabled below)
 local python_lsps = {
-  pyright = true,
+  pyright = false,
   basedpyright = false,
-  ty = false,
+  ty = true,
   pyrefly = false,
 }
 

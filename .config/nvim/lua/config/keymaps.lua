@@ -11,10 +11,10 @@ vim.keymap.set("t", "<C-j>", "wincmd j", opts)           -- down
 vim.keymap.set("t", "<C-k>", "wincmd k", opts)           -- up
 vim.keymap.set("t", "<C-l>", "wincmd l", opts)           -- right
 --tmux navigation
-vim.keymap.set("n", "<C-h>", ":TmuxNavigateleft", opts)  -- left
-vim.keymap.set("n", "<C-j>", ":TmuxNavigatedown", opts)  -- down
-vim.keymap.set("n", "<C-k>", ":TmuxNavigateup", opts)    -- up
-vim.keymap.set("n", "<C-l>", ":TmuxNavigateright", opts) -- right
+vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", opts)
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", opts)
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", opts)
+vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", opts)
 -- nvim tree
 vim.keymap.set("n", "<leader>t", ":NvimTreeFocus<CR>", opts)
 vim.keymap.set("n", "<leader>ff", ":NvimTreeToggle<CR>", opts)
@@ -71,3 +71,15 @@ vim.api.nvim_set_keymap("n", "<Leader>du", "<Cmd>lua require('dapui').toggle()<C
 vim.api.nvim_set_keymap("n", "<Leader>dr", "<Cmd>lua require('dap').repl.open()<CR>", opts)
 -- Toggle the DAP console
 vim.api.nvim_set_keymap("n", "<Leader>dc", "<Cmd>lua require('dapui').eval()<CR>", opts)
+
+--Diagnostics/ LSP
+vim.keymap.set("n", "<leader>e", function()
+  vim.diagnostic.open_float(nil, { scope = "cursor", border = "rounded", source = "always" })
+end, opts)
+
+vim.keymap.set("n", "<leader>E", function()
+  vim.diagnostic.open_float(nil, { scope = "line", border = "rounded", source = "always" })
+end, opts)
+
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setqflist, opts) -- :copen
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, opts) -- :lopen
