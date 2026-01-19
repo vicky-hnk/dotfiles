@@ -26,8 +26,6 @@ alias config='/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME"'
 
 # Start Ups
 alias mlflowstart='cd mlflow && mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlflow-artifacts --host 0.0.0.0'
-alias pycharm='nohup "$HOME/.local/pycharm-2023.3.5/bin/pycharm.sh" &> /dev/null &'
-alias IJ='nohup "$HOME/.local/ideaC/bin/idea.sh" &> /dev/null &'
 
 # Util scripts
 alias gen_ssh='bash "$HOME/repos/utils/gen_ssh.sh"'
