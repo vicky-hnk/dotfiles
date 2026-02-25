@@ -18,6 +18,7 @@ fi
 
 # Prevent Oh My Zsh from asking about insecure completion dirs
 export ZSH_DISABLE_COMPFIX=true
+PS1='${VIRTUAL_ENV_PROMPT:+($VIRTUAL_ENV_PROMPT)}[\w]\n\$ '
 
 # ==============================
 # OMZ

@@ -1,9 +1,12 @@
 return {
   "nvim-tree/nvim-tree.lua",
   lazy = false,
-  config = {
-    filters = { 
+  opts = {
+    filters = {
       dotfiles = false,
-   },
- }
+    },
+  },
+  config = function(_, opts)
+    require("nvim-tree").setup(opts)
+  end,
 }
