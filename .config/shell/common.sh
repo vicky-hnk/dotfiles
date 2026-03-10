@@ -33,3 +33,7 @@ alias decompress='bash "$HOME/repos/utils/decompress.sh"'
 alias createrepo='bash "$HOME/repos/utils/create_repo.sh"'
 alias memory='bash "$HOME/repos/utils/memory.sh"'
 alias set_node='bash "$HOME/repos/utils/set_nv.sh"'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
